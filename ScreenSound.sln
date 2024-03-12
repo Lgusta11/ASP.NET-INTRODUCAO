@@ -5,6 +5,10 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScreenSound", "ScreenSound\ScreenSound.csproj", "{A9CCE41C-6657-42BF-AED4-F3F578033037}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenSoundAPI", "ScreenSoundAPI\ScreenSoundAPI.csproj", "{3E5D982C-1CE3-4233-BDDC-D34A133C9FF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenSound.Shared.Modelos", "ScreenSound.Shared.Modelos\ScreenSound.Shared.Modelos.csproj", "{597F07E3-C964-400B-9693-C1DAAFF7CFE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +19,19 @@ Global
 		{A9CCE41C-6657-42BF-AED4-F3F578033037}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9CCE41C-6657-42BF-AED4-F3F578033037}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9CCE41C-6657-42BF-AED4-F3F578033037}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E5D982C-1CE3-4233-BDDC-D34A133C9FF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E5D982C-1CE3-4233-BDDC-D34A133C9FF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E5D982C-1CE3-4233-BDDC-D34A133C9FF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E5D982C-1CE3-4233-BDDC-D34A133C9FF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{597F07E3-C964-400B-9693-C1DAAFF7CFE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{597F07E3-C964-400B-9693-C1DAAFF7CFE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{597F07E3-C964-400B-9693-C1DAAFF7CFE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{597F07E3-C964-400B-9693-C1DAAFF7CFE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CF16B80D-A1A7-48ED-9668-10A30176F48B}
 	EndGlobalSection
 EndGlobal
