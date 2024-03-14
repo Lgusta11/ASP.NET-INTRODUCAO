@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace ScreenSound.Banco;
 public class DAL<T> where T : class
