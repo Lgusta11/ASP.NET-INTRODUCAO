@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json; // Adicionado para usar o Newtonsoft.Json
 using ScreenSound.Banco;
 using ScreenSound.Modelos;
-using System.Text.Json.Serialization;
-
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options => options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
+// Configuração do serviço de serialização JSON para usar Newtonsoft.Json
+builder.Services.AddControllers().AddNewtonsoftJson();
 
 var app = builder.Build();
 
@@ -15,21 +16,18 @@ app.MapGet("/Artistas", () =>
     return Results.Ok(dal.Listar());
 });
 
-
 app.MapGet("/Artistas/{nome}", (string nome) =>
 {
     var dal = new DAL<Artista>(new ScreenSoundContext());
-    var artista =  dal.RecuperarPor(a => a.Nome.ToUpper().Equals(nome.ToUpper()));
+    var artista = dal.RecuperarPor(a => a.Nome.ToUpper().Equals(nome.ToUpper()));
     if (artista is null)
     {
-
         return Results.NotFound();
-    
     }
     return Results.Ok(artista);
 });
 
-app.MapPost ("/Artistas" ,([FromBody]Artista artista) =>
+app.MapPost("/Artistas", ([FromBody] Artista artista) =>
 {
     var dal = new DAL<Artista>(new ScreenSoundContext());
     dal.Adicionar(artista);
