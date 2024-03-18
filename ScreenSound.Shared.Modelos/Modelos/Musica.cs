@@ -6,7 +6,7 @@ public class Musica
     {
 
     }
-    public Musica(string nome)
+    public Musica(string nome, int anoLancamento, int artistaId)
     {
         Nome = nome;
     }
