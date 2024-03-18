@@ -4,6 +4,7 @@ using ScreenSound.Modelos;
 using System.Data.SqlTypes;
 using System.Text.Json.Serialization;
 using ScreenSoundAPI.EndPoints;
+using ScreenSound.API.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
