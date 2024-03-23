@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
+using ScreenSound.API.Requests;
 using ScreenSound.Banco;
 using ScreenSound.Modelos;
 using ScreenSound.Shared.Modelos.Modelos;
@@ -73,24 +74,25 @@ public static class MusicasExtensions
             return Results.Ok();
         });
         #endregion
-
     }
 
     private static ICollection<Genero> GeneroRequestConverter(ICollection<GeneroRequest> generos, DAL<Genero> dalGenero)
     {
-       var listaDeGeneros = new List<Genero>();
-        foreach (var item in generos) {
-        var entity = RequestToEntity(item);
-            var genero = dalGenero.RecuperarPor(g=>g.Nome.ToUpper().Equals(item.nome.ToUpper()));
-        if (genero is not null)
+        var listaDeGeneros = new List<Genero>();
+        foreach (var item in generos)
+        {
+            var entity = RequestToEntity(item);
+            var genero = dalGenero.RecuperarPor(g => g.Nome.ToUpper().Equals(item.nome.ToUpper()));
+            if (genero is not null)
             {
                 listaDeGeneros.Add(genero);
-            }else
+            }
+            else
             {
                 listaDeGeneros.Add(entity);
             }
-
         }
+
         return listaDeGeneros;
     }
 

@@ -22,7 +22,7 @@ var app = builder.Build();
 
 app.AddEndPointsArtistas();
 app.AddEndPointsMusicas();
-app.AddEndPointsGenero();
+app.AddEndPointGeneros();
 
 app.UseSwagger();
 app.UseSwaggerUI();
