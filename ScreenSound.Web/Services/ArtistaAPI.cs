@@ -1,48 +1,40 @@
-﻿// ArtistasAPI.cs
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
+﻿using ScreenSound.Web.Requests;
 using ScreenSound.Web.Response;
+using System.Net.Http.Json;
+using System.Reflection.Metadata;
 
-namespace ScreenSound.Web.Services
+namespace ScreenSound.Web.Services;
+
+public class ArtistasAPI
 {
-    public class ArtistasAPI
+    public readonly HttpClient _httpClient;
+    public ArtistasAPI(IHttpClientFactory factory)
     {
-        private readonly HttpClient _httpClient;
-
-        public ArtistasAPI(HttpClient httpClient)
-        {
-            _httpClient = httpClient;
-        }
-
-        public async Task<List<ArtistaResponse>?> GetArtistasAsync()
-        {
-            try
-            {
-                var artistas = await _httpClient.GetFromJsonAsync<List<ArtistaResponse>>("Artistas");
-
-                if (artistas != null && artistas.Count > 0)
-                {
-                    Console.WriteLine("Artistas obtidos com sucesso:");
-                    foreach (var artista in artistas)
-                    {
-                        Console.WriteLine($"Nome: {artista.Nome}");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Nenhum artista encontrado na resposta da API.");
-                }
-
-                return artistas;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Erro ao obter artistas da API: {ex.Message}");
-                return null;
-            }
-        }
+        _httpClient = factory.CreateClient("API");
     }
+
+    public async Task<ICollection<ArtistaResponse>?> GetArtistasAsync()
+    {
+        return await _httpClient.GetFromJsonAsync<ICollection<ArtistaResponse>>("artistas");
+    }
+
+    public async Task AddArtistaAsync(ArtistaRequest artista)
+    {
+        await _httpClient.PostAsJsonAsync("artistas", artista);
+    }
+
+    public async Task DeleteArtistaAsync(int id)
+    {
+        await _httpClient.DeleteAsync($"artistas/{id}");
+    }
+
+    public async Task<ArtistaResponse?> GetArtistaPorNomeAsync(string nome)
+    {
+        return await _httpClient.GetFromJsonAsync<ArtistaResponse>($"artistas/{nome}");
+    }
+    public async Task UpdateArtistaAsync(ArtistaRequestEdit artista)
+    {
+        await _httpClient.PutAsJsonAsync($"artistas", artista);
+    }
+
 }

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ScreenSound.API.Requests;
 using ScreenSound.API.Response;
 using ScreenSound.Banco;
 using ScreenSound.Shared.Modelos.Modelos;
-using ScreenSoundAPI.Requests;
 
 namespace ScreenSound.API.Endpoints;
 
@@ -47,7 +47,7 @@ public static class GeneroExtensions
 
     private static Genero RequestToEntity(GeneroRequest generoRequest)
     {
-        return new Genero() { Nome = generoRequest.nome, Descricao = generoRequest.Descricao };
+        return new Genero() { Nome = generoRequest.Nome, Descricao = generoRequest.Descricao };
     }
 
     private static ICollection<GeneroResponse> EntityListToResponseList(IEnumerable<Genero> generos)

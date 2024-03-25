@@ -1,5 +1,3 @@
-﻿namespace ScreenSoundAPI.Response
-{
-    public record MusicaResponse(int Id, string Nome, int ArtistaId, string NomeArtista);
-    
-}
+﻿namespace ScreenSound.API.Response;
+
+public record MusicaResponse(int Id, string Nome, int ArtistaId, string NomeArtista, int? anoLancamento);

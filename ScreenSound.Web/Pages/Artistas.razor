@@ -1,23 +1,21 @@
 ﻿@page "/Artistas"
 @inject ArtistasAPI artistasAPI
-@using ScreenSound.Web.Response
 
 <h3>Artistas</h3>
-
-@if (artistas is not null && artistas.Count > 0)
+@if (artistas is not null)
 {
-    foreach (var artista in artistas)
-    {
-        <p>@artista.Nome</p>
-    }
-}
-else
-{
-    <p>Nenhum artista encontrado.</p>
+    <MudGrid>
+        @foreach (var artista in artistas)
+        {
+            <MudItem xs="3">
+                <CardArtista Artista="artista" />
+            </MudItem>
+        }
+    </MudGrid>
 }
 
 @code {
-    private List<ArtistaResponse>? artistas;
+    private ICollection<ArtistaResponse>? artistas;
 
     protected override async Task OnInitializedAsync()
     {

@@ -1,9 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
 using ScreenSound.Banco;
 using ScreenSound.Modelos;
-using System.Data.SqlTypes;
 using System.Text.Json.Serialization;
-using ScreenSoundAPI.EndPoints;
 using ScreenSound.API.Endpoints;
 using ScreenSound.Shared.Modelos.Modelos;
 
@@ -16,9 +13,22 @@ builder.Services.AddTransient<DAL<Genero>>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder => builder.WithOrigins("https://localhost:7075")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod());
+});
 builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options => options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
 var app = builder.Build();
+
+// Adicione o middleware de roteamento
+app.UseRouting();
+
+// Adicione o middleware de CORS após o middleware de roteamento, mas antes de outros middlewares
+app.UseCors("AllowSpecificOrigin");
 
 app.AddEndPointsArtistas();
 app.AddEndPointsMusicas();
