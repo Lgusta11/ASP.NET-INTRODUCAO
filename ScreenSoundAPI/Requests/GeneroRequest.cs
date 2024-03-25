@@ -1,3 +1,3 @@
-﻿namespace ScreenSound.API.Requests;
+﻿namespace ScreenSoundAPI.Requests;
 
 public record GeneroRequest(string Nome, string Descricao);

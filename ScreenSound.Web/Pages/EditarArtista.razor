@@ -1,5 +1,4 @@
-﻿@page "/EditarArtista/{NomeArtista}"
-@inject ArtistasAPI artistasAPI
+﻿@inject ArtistasAPI artistasAPI
 @inject NavigationManager navigationManager
 @if (Artista is not null)
 {
@@ -74,7 +73,7 @@ else
 
     private async Task Editar()
     {
-        var requestEdit = new ArtistaRequestEdit(Artista!.Id, nome!, biografia!);
+        var requestEdit = new ArtistaRequestEdit(Artista!.Id, nome!, biografia!, Artista!.FotoPerfil);
         await artistasAPI.UpdateArtistaAsync(requestEdit);
         navigationManager.NavigateTo("/Artistas");
     }

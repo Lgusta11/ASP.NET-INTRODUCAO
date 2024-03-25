@@ -1,8 +1,9 @@
+using ScreenSound.API.Endpoints;
 using ScreenSound.Banco;
 using ScreenSound.Modelos;
-using System.Text.Json.Serialization;
-using ScreenSound.API.Endpoints;
 using ScreenSound.Shared.Modelos.Modelos;
+using ScreenSoundAPI.EndPoints;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,22 +14,20 @@ builder.Services.AddTransient<DAL<Genero>>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowSpecificOrigin",
-        builder => builder.WithOrigins("https://localhost:7075")
-                          .AllowAnyHeader()
-                          .AllowAnyMethod());
-});
-builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options => options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
+builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options => options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+builder.Services.AddCors();
 var app = builder.Build();
 
-// Adicione o middleware de roteamento
-app.UseRouting();
+app.UseCors(options =>
+{
+    options.AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader();
 
-// Adicione o middleware de CORS após o middleware de roteamento, mas antes de outros middlewares
-app.UseCors("AllowSpecificOrigin");
+});
+
+app.UseStaticFiles();
 
 app.AddEndPointsArtistas();
 app.AddEndPointsMusicas();

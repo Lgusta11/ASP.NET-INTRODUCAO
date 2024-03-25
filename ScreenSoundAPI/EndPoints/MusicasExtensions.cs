@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ScreenSound.API.Requests;
-using ScreenSound.API.Response;
 using ScreenSound.Banco;
 using ScreenSound.Modelos;
 using ScreenSound.Shared.Modelos.Modelos;
+using ScreenSoundAPI.Requests;
+using ScreenSoundAPI.Response;
 
-namespace ScreenSound.API.Endpoints;
+namespace ScreenSoundAPI.EndPoints;
 
 public static class MusicasExtensions
 {
@@ -48,7 +48,8 @@ public static class MusicasExtensions
             return Results.Ok();
         });
 
-        app.MapDelete("/Musicas/{id}", ([FromServices] DAL<Musica> dal, int id) => {
+        app.MapDelete("/Musicas/{id}", ([FromServices] DAL<Musica> dal, int id) =>
+        {
             var musica = dal.RecuperarPor(a => a.Id == id);
             if (musica is null)
             {
@@ -59,7 +60,8 @@ public static class MusicasExtensions
 
         });
 
-        app.MapPut("/Musicas", ([FromServices] DAL<Musica> dal, [FromBody] MusicaRequestEdit musicaRequestEdit) => {
+        app.MapPut("/Musicas", ([FromServices] DAL<Musica> dal, [FromBody] MusicaRequestEdit musicaRequestEdit) =>
+        {
             var musicaAAtualizar = dal.RecuperarPor(a => a.Id == musicaRequestEdit.Id);
             if (musicaAAtualizar is null)
             {

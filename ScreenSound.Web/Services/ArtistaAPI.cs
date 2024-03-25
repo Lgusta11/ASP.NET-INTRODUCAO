@@ -7,7 +7,7 @@ namespace ScreenSound.Web.Services;
 
 public class ArtistasAPI
 {
-    public readonly HttpClient _httpClient;
+    private readonly HttpClient _httpClient;
     public ArtistasAPI(IHttpClientFactory factory)
     {
         _httpClient = factory.CreateClient("API");

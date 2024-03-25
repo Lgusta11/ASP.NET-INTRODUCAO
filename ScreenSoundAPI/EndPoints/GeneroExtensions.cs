@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ScreenSound.API.Requests;
-using ScreenSound.API.Response;
 using ScreenSound.Banco;
 using ScreenSound.Shared.Modelos.Modelos;
+using ScreenSoundAPI.Requests;
+using ScreenSoundAPI.Response;
 
-namespace ScreenSound.API.Endpoints;
+namespace ScreenSoundAPI.EndPoints;
 
 public static class GeneroExtensions
 {

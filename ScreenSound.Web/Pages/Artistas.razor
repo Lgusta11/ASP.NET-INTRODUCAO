@@ -1,7 +1,6 @@
 ﻿@page "/Artistas"
 @inject ArtistasAPI artistasAPI
 
-
 <MudStack Class="mt-4 mb-4" Row="true" Justify="Justify.SpaceBetween">
     <MudText Class="mb-4" Typo="Typo.h4">Artistas cadastrados</MudText>
     <MudPagination Count="@totalPaginas" SelectedChanged="PaginaMudou"></MudPagination>
@@ -25,7 +24,6 @@
     private int totalItens;
     private int totalPaginas;
     private ICollection<ArtistaResponse>? artistasPorPagina;
-   
 
     protected override async Task OnInitializedAsync()
     {
@@ -38,6 +36,7 @@
             this.PaginaMudou(1);
         }
     }
+
     private void PaginaMudou(int pageNumber)
     {
         var indice = pageNumber - 1;
@@ -46,6 +45,4 @@
             .Take(tamanho)
             .ToList();
     }
-
-}
 }
