@@ -2,10 +2,10 @@
 using ScreenSound.Banco;
 using ScreenSound.Modelos;
 using ScreenSound.Shared.Modelos.Modelos;
-using ScreenSoundAPI.Requests;
-using ScreenSoundAPI.Response;
+using ScreenSound.API.Response;
+using ScreenSound.API.Requests;
 
-namespace ScreenSoundAPI.EndPoints;
+namespace ScreenSound.API.EndPoints;
 
 public static class MusicasExtensions
 {

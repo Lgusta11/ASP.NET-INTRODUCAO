@@ -1,8 +1,8 @@
 using ScreenSound.API.Endpoints;
+using ScreenSound.API.EndPoints;
 using ScreenSound.Banco;
 using ScreenSound.Modelos;
 using ScreenSound.Shared.Modelos.Modelos;
-using ScreenSoundAPI.EndPoints;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
