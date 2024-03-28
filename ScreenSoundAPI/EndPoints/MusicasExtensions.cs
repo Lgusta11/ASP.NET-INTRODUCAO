@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ScreenSound.API.Requests;
+using ScreenSound.API.Response;
 using ScreenSound.Banco;
 using ScreenSound.Modelos;
 using ScreenSound.Shared.Modelos.Modelos;
-using ScreenSound.API.Response;
-using ScreenSound.API.Requests;
+using System;
 
-namespace ScreenSound.API.EndPoints;
+namespace ScreenSound.API.Endpoints;
 
 public static class MusicasExtensions
 {
@@ -14,13 +15,21 @@ public static class MusicasExtensions
         #region Endpoint Músicas
         app.MapGet("/Musicas", ([FromServices] DAL<Musica> dal) =>
         {
-            var musicaList = dal.Listar();
-            if (musicaList is null)
+            try
             {
-                return Results.NotFound();
+                var musicaList = dal.Listar();
+                if (musicaList is null)
+                {
+                    return Results.NotFound();
+                }
+                var musicaListResponse = EntityListToResponseList(musicaList);
+                return Results.Ok(musicaListResponse);
             }
-            var musicaListResponse = EntityListToResponseList(musicaList);
-            return Results.Ok(musicaListResponse);
+            catch (Exception ex)
+            {
+                // Log the exception
+                return Results.Problem(detail: ex.Message);
+            }
         });
 
         app.MapGet("/Musicas/{nome}", ([FromServices] DAL<Musica> dal, string nome) =>
@@ -48,8 +57,7 @@ public static class MusicasExtensions
             return Results.Ok();
         });
 
-        app.MapDelete("/Musicas/{id}", ([FromServices] DAL<Musica> dal, int id) =>
-        {
+        app.MapDelete("/Musicas/{id}", ([FromServices] DAL<Musica> dal, int id) => {
             var musica = dal.RecuperarPor(a => a.Id == id);
             if (musica is null)
             {
@@ -60,8 +68,7 @@ public static class MusicasExtensions
 
         });
 
-        app.MapPut("/Musicas", ([FromServices] DAL<Musica> dal, [FromBody] MusicaRequestEdit musicaRequestEdit) =>
-        {
+        app.MapPut("/Musicas", ([FromServices] DAL<Musica> dal, [FromBody] MusicaRequestEdit musicaRequestEdit) => {
             var musicaAAtualizar = dal.RecuperarPor(a => a.Id == musicaRequestEdit.Id);
             if (musicaAAtualizar is null)
             {
@@ -108,6 +115,13 @@ public static class MusicasExtensions
 
     private static MusicaResponse EntityToResponse(Musica musica)
     {
-        return new MusicaResponse(musica.Id, musica.Nome!, musica.Artista!.Id, musica.Artista.Nome, musica.AnoLancamento);
+        return new MusicaResponse(
+            musica.Id,
+            musica.Nome,
+            musica.Artista?.Id ?? 0, // Se musica.Artista for nulo, define o Id como 0
+            musica.Artista?.Nome ?? "Nome do Artista Desconhecido", // Se musica.Artista for nulo, define o nome como uma string padrão
+            musica.AnoLancamento
+        );
     }
+
 }
