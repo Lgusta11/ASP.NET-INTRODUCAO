@@ -11,7 +11,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddMudServices();
 
-builder.Services.AddScoped<ArtistasAPI>();
+builder.Services.AddScoped<ArtistaAPI>();
 builder.Services.AddScoped<MusicasAPI>();
 builder.Services.AddScoped<GeneroAPI>();    
 

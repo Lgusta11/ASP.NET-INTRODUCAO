@@ -1,26 +1,38 @@
 ﻿@inherits LayoutComponentBase
 
-
-<MudThemeProvider />
+<MudThemeProvider Theme="currentTheme" />
 <MudDialogProvider />
 <MudSnackbarProvider />
 
 <MudLayout>
-    <MudAppBar Color="Color.Surface" Fixed="true" Elevation="2">
-        <MudImage Src="images/screensound-logo.png"></MudImage>
+    <!-- Barra de Navegação -->
+    <MudAppBar Color="Color.Primary" Fixed="true" Elevation="3">
+        <MudImage Src="images/screensound-logo.png" Class="logo"></MudImage>
+        <MudIconButton Icon="@Icons.Filled.Menu" OnClick="ToggleDrawer" Class="ml-auto d-md-none"></MudIconButton>
     </MudAppBar>
-    <MudDrawer Open="true" ClipMode="DrawerClipMode.Always" Elevation="2">
+
+    <!-- Menu Lateral (Drawer) -->
+    <MudDrawer Open="@drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="3" Variant="DrawerVariant.Responsive" Breakpoint="Breakpoint.Md" Class="custom-drawer">
         <NavMenu></NavMenu>
     </MudDrawer>
+
+    <!-- Conteúdo Principal -->
     <MudMainContent class="main-content pa-10">
         @Body
     </MudMainContent>
-   
 </MudLayout>
+
 @code {
+    // Fields and Properties
+    private bool drawerOpen = true;
     private MudTheme currentTheme = new MudTheme()
         {
             Palette = ScreendsoundPallete.CreatePallete
         };
- }
 
+    // Methods
+    void ToggleDrawer()
+    {
+        drawerOpen = !drawerOpen;
+    }
+}
